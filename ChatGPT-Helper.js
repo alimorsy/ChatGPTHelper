@@ -107,7 +107,8 @@ $(document).on('click', function(e) {
 if (!icon.is(e.target)) {
 contextMenu.hide();
 }
-});});
+});
+
 function hasTextarea(element, depth = 1, maxDepth = 3) {
   if (depth > maxDepth) {
     return false;
