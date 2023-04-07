@@ -231,14 +231,14 @@ $(document).ready(function () {
     });
     $('body').append(contextMenu);
 });
-// Create circular black icon
-var icon = $('<div>Util</div>').css({
+// Create NebrasChatGPTHelper icon
+var icon = $('<div>N</div>').css({
     position: 'fixed',
     top: '10px',
     right: '20px',
     width: '60px',
     height: '60px',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     borderRadius: '50%',
     zIndex: '999',
     cursor: 'pointer',
@@ -246,8 +246,9 @@ var icon = $('<div>Util</div>').css({
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: '18px',
-    color: 'white',
-    fontWeight: 'bold'
+    color: 'orange',
+    fontWeight: 'bold',
+    border: '1px solid black'
 });
 icon.on('click', function (e) {
     console.log("Clicked")
