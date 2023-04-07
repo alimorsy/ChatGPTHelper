@@ -89,7 +89,8 @@ function openNotesPopup() {
         padding: '10px',
         zIndex: '1001',
         minWidth: '400px',
-        maxWidth: '50%'
+        maxWidth: '50%',
+        height: '525px',
     });
 
     notesPopup.Id
@@ -122,7 +123,9 @@ function openNotesPopup() {
     var notesList = $('<ul></ul>').css({
         listStyleType: 'none',
         padding: '0',
-        margin: '0'
+        margin: '0',
+        height: '200px',
+        overflowY: 'auto'
     });
 
     notesPopup.append(popupTitle, notesTextArea, addButton, notesList);
@@ -158,11 +161,17 @@ function openNotesPopup() {
 
         if (pageNotes) {
             notesList.empty();
-            pageNotes.Notes.forEach(function (note) {
+            pageNotes.Notes.forEach(function (note, index) {
                 var noteItem = $('<li></li>').text(note).css({
                     color: '#ccc',
                     borderBottom: '1px solid #444',
-                    padding: '5px 0'
+                    padding: '5px 0',
+                    whiteSpace: 'pre-wrap',
+                    overflowWrap: 'break-word',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+
                 });
                 var deleteButton = $('<button>Delete</button>').css({
                     color: '#ccc',
@@ -171,7 +180,8 @@ function openNotesPopup() {
                     borderRadius: '5px',
                     padding: '2px 5px',
                     marginLeft: '10px',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    marginLeft: 'auto'
                 });
 
                 // Handle click on the Delete button
