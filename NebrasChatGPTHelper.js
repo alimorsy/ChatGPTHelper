@@ -389,57 +389,78 @@ function openNotesPopup() {
         }
     });
 }
-$(document).ready(function () {
-    mainMenuItems.forEach(function (item) {
-        var menuItem = createMenuItem(item);
-        contextMenu.append(menuItem);
-    });
-    $('body').append(contextMenu);
-});
-// Create NebrasChatGPTHelper icon
-var icon = $('<div>N</div>').css({
-    position: 'fixed',
-    top: '10px',
-    right: '20px',
-    width: '60px',
-    height: '60px',
-    backgroundColor: 'white',
-    borderRadius: '50%',
-    zIndex: '999',
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '18px',
-    color: 'orange',
-    fontWeight: 'bold',
-    border: '1px solid black'
-});
-icon.on('click', function (e) {
-    console.log("Clicked")
-    contextMenu.css({ top: e.pageY + 10, left: e.pageX - contextMenu.width() }).show();
-});
-contextMenu.on('click', 'li:contains("Notes")', function () {
-    openNotesPopup();
-    contextMenu.hide();
-});
-contextMenu.on('click', 'li:contains("Code Review")', function () {
-    showCodeReviewPopup();
-    contextMenu.hide();
-});
-$('body').append(icon);
-// Close the Notes popup when the Esc key is pressed
-$(document).on('keydown', function (event) {
-    if (event.key === 'Escape') {
-        $('body').find('div#notesPopup').remove();
+
+document.addEventListener('DOMContentLoaded', function () {
+    function onJQueryLoaded() {
+        $(document).ready(function () {
+            mainMenuItems.forEach(function (item) {
+                var menuItem = createMenuItem(item);
+                contextMenu.append(menuItem);
+            });
+            $('body').append(contextMenu);
+        });
+        // Create NebrasChatGPTHelper icon
+        var icon = $('<div>N</div>').css({
+            position: 'fixed',
+            top: '10px',
+            right: '20px',
+            width: '60px',
+            height: '60px',
+            backgroundColor: 'white',
+            borderRadius: '50%',
+            zIndex: '999',
+            cursor: 'pointer',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '18px',
+            color: 'orange',
+            fontWeight: 'bold',
+            border: '1px solid black'
+        });
+        icon.on('click', function (e) {
+            console.log("Clicked")
+            contextMenu.css({ top: e.pageY + 10, left: e.pageX - contextMenu.width() }).show();
+        });
+        contextMenu.on('click', 'li:contains("Notes")', function () {
+            openNotesPopup();
+            contextMenu.hide();
+        });
+        contextMenu.on('click', 'li:contains("Code Review")', function () {
+            showCodeReviewPopup();
+            contextMenu.hide();
+        });
+        $('body').append(icon);
+        // Close the Notes popup when the Esc key is pressed
+        $(document).on('keydown', function (event) {
+            if (event.key === 'Escape') {
+                $('body').find('div#notesPopup').remove();
+            }
+        });
+
+        $(document).on('click', function (e) {
+            if (!icon.is(e.target)) {
+                contextMenu.hide();
+            }
+        });
+    }
+
+    if (typeof jQuery === 'undefined') {
+        var script = document.createElement('script');
+        script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+        script.type = 'text/javascript';
+        script.onload = function () {
+            console.log('jQuery has been loaded');
+            onJQueryLoaded();
+        };
+        document.getElementsByTagName('head')[0].appendChild(script);
+    } else {
+        console.log('jQuery is already loaded');
+        onJQueryLoaded();
     }
 });
 
-$(document).on('click', function (e) {
-    if (!icon.is(e.target)) {
-        contextMenu.hide();
-    }
-});
+
 
 function hasTextarea(element, depth = 1, maxDepth = 3) {
     if (depth > maxDepth) {
