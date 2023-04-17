@@ -229,15 +229,7 @@ function pasteTextAtCaret(text) {
         activeElement.selectionStart = activeElement.selectionEnd = start + text.length;
     }
 }
-var contextMenu = $('<ul class="custom-context-menu"></ul>').css({
-    display: 'none',
-    position: 'absolute',
-    backgroundColor: '#222',
-    border: '1px solid #333',
-    borderRadius: '5px',
-    padding: '5px',
-    zIndex: '1000'
-});
+
 function openNotesPopup() {
     var pageId = window.location.pathname.split('/').pop();
     var storageKey = 'notesData';
@@ -392,6 +384,17 @@ function openNotesPopup() {
 
 document.addEventListener('DOMContentLoaded', function () {
     function onJQueryLoaded() {
+
+        var contextMenu = $('<ul class="custom-context-menu"></ul>').css({
+            display: 'none',
+            position: 'absolute',
+            backgroundColor: '#222',
+            border: '1px solid #333',
+            borderRadius: '5px',
+            padding: '5px',
+            zIndex: '1000'
+        });
+
         $(document).ready(function () {
             mainMenuItems.forEach(function (item) {
                 var menuItem = createMenuItem(item);
